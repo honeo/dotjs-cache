@@ -7,6 +7,10 @@
 成功すればlocalStorageにキャッシュして次からはそれを使う。
 
 ## 使い方
+```sh
+$ npm i -D dotjs-cache
+```
+
 Promiseインスタンスを返す。
 ```js
 const dotjsCache = require('dotjs-cache');
