@@ -28,7 +28,7 @@ for(let key in cacheObj){
 			失敗すれば通常読み込み
 */
 function main({
-	url, cache=cache_default, cors=cors_default, exec=exec_default, expire=expire_default, retry=retry_default,
+	url, withCredentials=false, ache=cache_default, cors=cors_default, exec=exec_default, expire=expire_default, retry=retry_default,
 }){
 	const target = cacheObj[url];
 	return new Promise( (resolve, reject)=>{
@@ -51,6 +51,7 @@ function main({
 			xhr.onerror = (e)=>{
 				reject(e);
 			}
+			xhr.withCredentials = withCredentials;
 			xhr.send(null);
 		}
 	}).then( (code)=>{
