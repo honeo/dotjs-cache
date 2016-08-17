@@ -2,7 +2,7 @@
 const
 	_name = 'dotjs-cache',
 	doc = document,
-	head = doc.head || (doc.head = doc.getElementsByTagName('head')[0]),
+	head = doc.head,
 	lS  = localStorage,
 	cacheObj = JSON.parse(lS[_name] || '{}'),
 	Datenow = Date.now(),
