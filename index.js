@@ -6,11 +6,6 @@ const
 	lS  = localStorage,
 	cacheObj = JSON.parse(lS[_name] || '{}'),
 	Datenow = Date.now(),
-	cache_default = true,
-	cors_default = false,
-	exec_default = true,
-	expire_default = {date: 1},
-	retry_default = true;
 
 // 期限チェック
 for(let key in cacheObj){
@@ -28,7 +23,13 @@ for(let key in cacheObj){
 			失敗すれば通常読み込み
 */
 function main({
-	url, withCredentials=false, ache=cache_default, cors=cors_default, exec=exec_default, expire=expire_default, retry=retry_default,
+	url,
+	withCredentials=false,
+	cache=true,
+	cors=false,
+	exec=true,
+	expire={date: 1},
+	retry=true
 }){
 	const target = cacheObj[url];
 	return new Promise( (resolve, reject)=>{
