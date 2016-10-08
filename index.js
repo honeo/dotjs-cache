@@ -5,7 +5,7 @@ const
 	head = doc.head,
 	lS  = localStorage,
 	cacheObj = JSON.parse(lS[_name] || '{}'),
-	Datenow = Date.now(),
+	Datenow = Date.now();
 
 // 期限チェック
 for(let key in cacheObj){
