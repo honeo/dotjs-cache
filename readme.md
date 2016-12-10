@@ -8,26 +8,26 @@
 
 ## 使い方
 ```sh
-$ npm i -D dotjs-cache
+$ npm i -s dotjs-cache
 ```
 
 Promiseインスタンスを返す。
 ```js
-const dotjsCache = require('dotjs-cache');
+import dotjsCache from 'dotjs-cache';
 
-dotjsCache({
-	url: 'http://example.com/hoge.js'
-}).then( (arg)=>{
+dotjsCache('http://example.com/hoge.js').then( (arg)=>{
 	console.log('hoge');
 });
-```
-設定は引数で渡すオブジェクトのプロパティから行う。  
 
+// option
+const promise = dotjsCache(url, {...});
+```
+
+## Options
 |properties	| default | description |
 |:---------:|:--------:| :----------:|
 |	cache	| true   | キャッシュ使用の有無        				|
 |	exec	| true | .jsファイル実行の有無						 |
 |	expire	| {date: 1}| キャッシュ期限を{year,mon,week,date,hour,min,sec}等で指定|
 |	retry	| true | 失敗時の通常読み込み(script要素.src)の有無|
-|	url		| __必須__ | 対象にする.jsファイルのアドレス |
 |withCredentials| false | withCredentialsの有無|

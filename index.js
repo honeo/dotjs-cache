@@ -1,5 +1,6 @@
 // Modules
-import jsTextExec from './js-text-exec.js';
+import {is, not} from '@honeo/type-check';
+import dateChanger from 'date-changer';
 
 // Var
 const
@@ -25,19 +26,21 @@ for(let key in cacheObj){
 			成功すればキャッシュ
 			失敗すれば通常読み込み
 */
-function dotjsCache({
-	url,
+function dotjsCache(url, {
 	withCredentials=false,
 	cache=true,
 	exec=true,
 	expire={date: 1},
 	retry=true
 }){
+	// validation
+	if( not.str(url) ){
+		new TypeError(`Invalid argument: ${url}`);
+	}
+
 	const target = cacheObj[url];
 	return new Promise( (resolve, reject)=>{
-		if(typeof url!=='string'){
-			reject(new TypeError('Invalid argument {url}'));
-		}else if( target ){
+		if( target ){
 			resolve(target.code);
 		}else{
 			const xhr = new XMLHttpRequest();
@@ -59,7 +62,7 @@ function dotjsCache({
 			// ログがなかった場合は保存
 			if( cache && !target ){
 				cacheObj[url] = {
-					expire: changeDate(expire).getTime(), // 期限日時 => ms
+					expire: dateChanger(expire).getTime(), // 期限日時 => ms
 					code
 				}
 				lS[_name] = JSON.stringify(cacheObj);
@@ -83,31 +86,5 @@ function loadScript(url){
 	head.appendChild(script);
 }
 
-// dateインスタンスの日付変更
-function changeDate(obj){
-	if(typeof obj!=='object'){
-		throw new TypeError('argument is only {...}');
-	}
-	const time = obj.instance ?
-		new Date(obj.instance.getTime()):
-		new Date();
-	const year = obj.years || obj.year || obj.yrs || obj.yr || obj.y;
-	const mon = obj.months || obj.month || obj.mon || obj.mo;
-	const week = obj.weeks || obj.week || obj.wks || obj.wk || obj.w;
-	const date = obj.dates || obj.date || obj.days || obj.day || obj.d;
-	const hour = obj.hours || obj.hour || obj.hr || obj.h;
-	const min = obj.minutes || obj.minute || obj.min || obj.m;
-	const sec = obj.seconds || obj.second || obj.sec || obj.s;
-	const ms = obj.milliseconds || obj.millisecond || obj.msec || obj.ms;
-	typeof year==='number' && time.setFullYear(time.getFullYear() + year);
-	typeof mon==='number' && time.setMonth(time.getMonth() + mon);
-	typeof week==='number' && time.setDate(time.getDate() + (week*7));
-	typeof date==='number' && time.setDate(time.getDate() + date);
-	typeof hour==='number' && time.setHours(time.getHours() + hour);
-	typeof min==='number' && time.setMinutes(time.getMinutes() + min);
-	typeof sec==='number' && time.setSeconds(time.getSeconds() + sec);
-	typeof ms==='number' && time.setMilliseconds(time.getMilliseconds() + ms);
-	return time;
-}
 
 export default dotjsCache;
