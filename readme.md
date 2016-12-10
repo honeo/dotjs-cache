@@ -21,8 +21,8 @@ dotjsCache('http://example.com/hoge.js').then( (arg)=>{
 ```
 
 ## Options
+第二引数のオブジェクトで指定する。
 ```js
-// option
 const promise = dotjsCache(url, {...});
 ```
 
@@ -30,6 +30,6 @@ const promise = dotjsCache(url, {...});
 |:---------:|:--------:| :----------:|
 |	cache	| true   | キャッシュ使用の有無        				|
 |	exec	| true | .jsファイル実行の有無						 |
-|	expire	| {date: 1}| キャッシュ期限を{year,mon,week,date,hour,min,sec}等で指定|
-| fallback	| false | 失敗時の通常読み込み(script要素.src)の有無|
+|	expire	| {date: 1}| キャッシュ期限を{key: number}で指定。詳しくは __[honeo/date-changer](https://github.com/honeo/date-changer#option)__|
+| fallback	| false | 失敗時の通常読み込み(scriptElement.src)の有無|
 |withCredentials| false | withCredentialsの有無|

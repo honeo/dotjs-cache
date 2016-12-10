@@ -1,6 +1,7 @@
 // Modules
 import {is, not} from '@honeo/type-check';
 import dateChanger from 'date-changer';
+import dotjsLoader from './dotjs-loader.js';
 
 // Var
 const
@@ -9,7 +10,8 @@ const
 	head = doc.head,
 	lS  = localStorage,
 	cacheObj = JSON.parse(lS[_name] || '{}'),
-	Datenow = Date.now();
+	Datenow = Date.now(),
+	debug = false;
 
 // 期限チェック
 for(let key in cacheObj){
@@ -17,6 +19,7 @@ for(let key in cacheObj){
 		delete cacheObj[key];
 	}
 }
+
 
 /*
 	モジュールの返り値になるやつ
@@ -33,6 +36,7 @@ function dotjsCache(url, {
 	expire={date: 1},
 	fallback=false
 }){
+	debug && console.log('dotjsCache', url);
 	// validation
 	if( not.str(url) ){
 		new TypeError(`Invalid argument: ${url}`);
@@ -41,8 +45,10 @@ function dotjsCache(url, {
 	const target = cacheObj[url];
 	return new Promise( (resolve, reject)=>{
 		if( target ){
+			debug && console.log('mode: cache');
 			resolve(target.code);
 		}else{
+			debug && console.log('mode: xhr');
 			const xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
 			xhr.onreadystatechange = ()=>{
@@ -72,19 +78,10 @@ function dotjsCache(url, {
 		}
 	}).catch( (e)=>{
 		// 通常読み込み
-		fallback && loadScript(url);
+		fallback && dotjsLoader(url);
 		Promise.reject(e);
 	})
 }
 
-// 普通にscript要素を突っ込んで.js読み込み
-function loadScript(url){
-	const script = doc.createElement('script');
-	script.defer = true;
-	script.async = true;
-	script.src = url;
-	head.appendChild(script);
-}
-
-
+debug && console.log(_name, cacheObj);
 export default dotjsCache;
