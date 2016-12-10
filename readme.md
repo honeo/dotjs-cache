@@ -26,7 +26,6 @@ dotjsCache({
 |properties	| default | description |
 |:---------:|:--------:| :----------:|
 |	cache	| true   | キャッシュ使用の有無        				|
-|	cors	| false | [cors.io](http://cors.io/)使用の有無 |
 |	exec	| true | .jsファイル実行の有無						 |
 |	expire	| {date: 1}| キャッシュ期限を{year,mon,week,date,hour,min,sec}等で指定|
 |	retry	| true | 失敗時の通常読み込み(script要素.src)の有無|

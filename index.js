@@ -1,3 +1,6 @@
+// Modules
+import jsTextExec from './js-text-exec.js';
+
 // Var
 const
 	_name = 'dotjs-cache',
@@ -22,11 +25,10 @@ for(let key in cacheObj){
 			成功すればキャッシュ
 			失敗すれば通常読み込み
 */
-function main({
+function dotjsCache({
 	url,
 	withCredentials=false,
 	cache=true,
-	cors=false,
 	exec=true,
 	expire={date: 1},
 	retry=true
@@ -39,11 +41,7 @@ function main({
 			resolve(target.code);
 		}else{
 			const xhr = new XMLHttpRequest();
-			xhr.open('GET', (
-				cors===true ?
-					`http://cors.io/?u=${url}`:
-					url
-			));
+			xhr.open('GET', url);
 			xhr.onreadystatechange = ()=>{
 				if(xhr.readyState===4 && xhr.status===200){
 					resolve(xhr.responseText);
@@ -112,4 +110,4 @@ function changeDate(obj){
 	return time;
 }
 
-module.exports = main;
+export default dotjsCache;
