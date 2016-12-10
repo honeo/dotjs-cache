@@ -31,7 +31,7 @@ function dotjsCache(url, {
 	cache=true,
 	exec=true,
 	expire={date: 1},
-	retry=true
+	fallback=false
 }){
 	// validation
 	if( not.str(url) ){
@@ -72,7 +72,7 @@ function dotjsCache(url, {
 		}
 	}).catch( (e)=>{
 		// 通常読み込み
-		retry && loadScript(url);
+		fallback && loadScript(url);
 		Promise.reject(e);
 	})
 }

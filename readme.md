@@ -18,16 +18,18 @@ import dotjsCache from 'dotjs-cache';
 dotjsCache('http://example.com/hoge.js').then( (arg)=>{
 	console.log('hoge');
 });
+```
 
+## Options
+```js
 // option
 const promise = dotjsCache(url, {...});
 ```
 
-## Options
-|properties	| default | description |
+| key	| value (default) | description |
 |:---------:|:--------:| :----------:|
 |	cache	| true   | キャッシュ使用の有無        				|
 |	exec	| true | .jsファイル実行の有無						 |
 |	expire	| {date: 1}| キャッシュ期限を{year,mon,week,date,hour,min,sec}等で指定|
-|	retry	| true | 失敗時の通常読み込み(script要素.src)の有無|
+| fallback	| false | 失敗時の通常読み込み(script要素.src)の有無|
 |withCredentials| false | withCredentialsの有無|
