@@ -1,9 +1,6 @@
 # dotjs-cache
-[honeo/dotjs-cache](https://github.com/honeo/dotjs-cache)  
-[dotjs-cache](https://www.npmjs.com/package/dotjs-cache)
-
-## Deprecated
-Use [dotjs-loader](https://github.com/honeo/dotjs-loader) instead.
+* [honeo/dotjs-cache](https://github.com/honeo/dotjs-cache)  
+* [dotjs-cache](https://www.npmjs.com/package/dotjs-cache)
 
 ## なにこれ
 .jsファイルをXHRで取得して実行する。  
