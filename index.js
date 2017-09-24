@@ -1,5 +1,5 @@
 // Modules
-import {is, not} from '@honeo/type-check';
+import {is, not, any} from '@honeo/check';
 import dateChanger from 'date-changer';
 import dotjsLoader from './dotjs-loader.js';
 

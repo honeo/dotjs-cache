@@ -4,7 +4,7 @@
 */
 
 // Modules
-import {is, not} from '@honeo/type-check';
+import {is, not, any} from '@honeo/check';
 
 // var
 const option = {
@@ -26,8 +26,8 @@ function dotjsLoader(url){
         script.defer = true;
     	script.async = true;
     	script.src = url;
-		document.head.appendChild(script);
-		document.head.remove(script);
+		document.head.append(script);
+		script.remove();
 	});
 }
 

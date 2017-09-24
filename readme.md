@@ -23,7 +23,9 @@ dotjsCache('http://example.com/hoge.js').then( (arg)=>{
 ## Options
 第二引数のオブジェクトで指定する。
 ```js
-const promise = dotjsCache(url, {...});
+const promise = dotjsCache(url, {
+	expire: {hour: 3}
+});
 ```
 
 | key	| value (default) | description |

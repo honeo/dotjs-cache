@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/honeo/dotjs-cache#readme",
   "dependencies": {
-    "@honeo/type-check": "^2.3.0",
+    "@honeo/check": "^1.0.2",
     "date-changer": "^1.0.1"
   }
 }
